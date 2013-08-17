@@ -1,9 +1,22 @@
 var _ = require("lodash");
-var fps = require("./index.js");
+var fps = require("./index.js")();
 
-fps().on("fps", _.throttle(function (fps) {
+function initButtons() {
+    document.querySelector("[data-role=pause]").addEventListener("click", function () {
+        fps.pause();
+    });
+    document.querySelector("[data-role=resume]").addEventListener("click", function () {
+        fps.resume();
+    });
+}
+
+try {
+    initButtons();
+} catch (e) {}
+
+fps.on("data", _.throttle(function (fps) {
     console.log(fps);
     try {
-        document.body.innerHTML = parseInt(fps);
+        document.querySelector("span").innerHTML = parseInt(fps);
     } catch (e) {}
 }, 100));
