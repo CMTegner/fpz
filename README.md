@@ -1,11 +1,11 @@
-# fps-stream
+# fpz
 
 ## Example
 
 ```js
-import fps from 'fps-stream'
+import fpz from 'fpz'
 
-const cancel = fps(f => console.log(f))
+const cancel = fpz(fps => console.log(fps))
 
 // Some time later, when you feel like not receiving any more fps measurements
 cancel()

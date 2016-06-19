@@ -3,7 +3,7 @@ var now = require("performance-now");
 
 var MS_PER_FRAME = 1000 / 60; // 16.66666...
 
-module.exports = function fps(onTick) {
+module.exports = function fpz(onTick) {
     var id;
     var last;
 
