@@ -1,25 +1,25 @@
 {
-  "name": "fps-stream",
+  "name": "fpz",
   "version": "1.0.0",
-  "description": "FPS-emiting module for use in the browser and in Node.js",
+  "description": "Get the current frames per second (FPS) without any hassle",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/CMTegner/fps-stream"
+    "url": "https://github.com/CMTegner/fpz"
   },
   "keywords": [
     "fps",
+    "frames",
     "node",
-    "browser",
-    "event"
+    "browser"
   ],
   "author": "Christian Maughan Tegnér <christian.tegner@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/CMTegner/fps-stream/issues"
+    "url": "https://github.com/CMTegner/fpz/issues"
   },
   "dependencies": {
-    "performance-now": "~0.1.2",
+    "performance-now": "^0.2.0",
     "raf": "^3.2.0"
   }
 }
