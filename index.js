@@ -1,40 +1,27 @@
-var util = require("util");
 var raf = require("raf");
 var now = require("performance-now");
-var EventEmitter = require("events").EventEmitter;
 
 var MS_PER_FRAME = 1000 / 60; // 16.66666...
 
-function FPS() {
-    if (!(this instanceof FPS)) {
-        return new FPS();
-    }
-    var self = this;
-    self.last = now();
-    // TODO: lodash modularize => _.bind
-    self.raf = raf().on("data", function () {
-        self.tick();
-    });
-    EventEmitter.call(self);
+module.exports = function fps(onTick) {
+    var id;
+    var last;
+
+    function tick() {
+        id = raf(tick);
+        var _now = now();
+        if (last) {
+            var delta = _now - last;
+            var fps = Math.round((MS_PER_FRAME / delta) * 60);
+            onTick(fps);
+        }
+        last = _now;
+    };
+
+    function cancel() {
+      raf.cancel(id);
+    };
+
+    tick();
+    return cancel;
 }
-
-util.inherits(FPS, EventEmitter);
-
-FPS.prototype.tick = function () {
-    var _now = now();
-    var delta = _now - this.last;
-    var fps = (MS_PER_FRAME / delta) * 60;
-    this.emit("data", fps);
-    this.last = _now;
-};
-
-FPS.prototype.pause = function () {
-    this.raf.pause();
-};
-
-FPS.prototype.resume = function () {
-    this.last = now();
-    this.raf.resume();
-};
-
-module.exports = FPS;
